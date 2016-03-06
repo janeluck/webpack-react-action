@@ -6,7 +6,11 @@ module.exports = {
 
     entry:  __dirname + '/src',
 
-
+    output: {
+        path:     'builds',
+        filename: 'bundle.js',
+        publicPath: 'builds'
+    },
 
     module: {
         loaders: [
