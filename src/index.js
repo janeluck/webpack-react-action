@@ -241,6 +241,50 @@ ReactDOM.render(
     document.getElementById('ajaxDemo')
 );
 
+var TodoList = React.createClass({
+    getItems: function(items){
+        console.log(items);
+        return items.map(function(item){
+            return <li>{item}</li>;
+        })
+    },
+    render: function(){
+        return (<ul>
+            {this.getItems(this.props.items)}
+        </ul>)
+    }
+});
+var TodoApp = React.createClass({
+    getInitialState: function() {
+        return {
+            value: '',
+            items: []
+        };
+    },
+    handleChange: function(event) {
+        this.setState({value: event.target.value});
+    },
+    handleClick: function(){
 
-
+        this.setState({items: this.state.items.concat(this.state.value)});
+        this.setState({value: ''});
+    },
+    render: function() {
+        return (
+            <div>
+                <TodoList items = {this.state.items} />
+                <input
+                    type="text"
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                />
+                <button onClick = {this.handleClick}>Add {this.state.items.length}</button>
+            </div>
+        );
+    }
+});
+ReactDOM.render(
+    <TodoApp/>,
+    document.getElementById('todoList')
+);
 
