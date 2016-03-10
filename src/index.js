@@ -2,6 +2,7 @@
  * Created by jane on 3/5/16.
  */
 
+// watch index.html
 require('../index.html');
 // main.js
 var React = require('react');
