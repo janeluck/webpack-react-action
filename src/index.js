@@ -266,8 +266,11 @@ var TodoApp = React.createClass({
     },
     handleClick: function(){
 
-        this.setState({items: this.state.items.concat(this.state.value)});
-        this.setState({value: ''});
+        this.setState({
+            items: this.state.items.concat(this.state.value),
+            value: ''
+        });
+
     },
     render: function() {
         return (
