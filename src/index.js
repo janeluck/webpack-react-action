@@ -241,21 +241,6 @@ ReactDOM.render(
     document.getElementById('ajaxDemo')
 );
 
-//
-var Joe = React.createClass({
-    render: function(){
-        return (
-            <div>
-                {this.props.content}
-            </div>
-        )
-    }
-});
-
-ReactDOM.render(
-    <Joe content = 's'/>,
-    document.getElementById('joe')
-)
 
 
 
