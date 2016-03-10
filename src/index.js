@@ -1,6 +1,8 @@
 /**
  * Created by jane on 3/5/16.
  */
+
+require('../index.html');
 // main.js
 var React = require('react');
 var ReactDOM = require('react-dom');
