@@ -8,10 +8,10 @@ require('../index.html');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
-var names = ['jane', 'joe', 'crystal'];
+var names = ['jane', 'joe', 'crystal', ['01', '02']];
 var titles = [
     'It\'s Work!',
-    'awesome',
+    'jane',
     names
 ];
 ReactDOM.render(
@@ -200,7 +200,7 @@ var Notices = React.createClass({
 });
 
 ReactDOM.render(
-    <Notices name="world"/>,
+    <Notices name="awesome"/>,
     document.getElementById('lifeCycle')
 
 );
