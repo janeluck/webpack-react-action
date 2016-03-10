@@ -278,7 +278,7 @@ var TodoApp = React.createClass({
                     value={this.state.value}
                     onChange={this.handleChange}
                 />
-                <button onClick = {this.handleClick}>Add {this.state.items.length}</button>
+                <button onClick = {this.handleClick}>Add {this.state.items.length + 1} </button>
             </div>
         );
     }
