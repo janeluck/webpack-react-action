@@ -243,9 +243,9 @@ ReactDOM.render(
 
 var TodoList = React.createClass({
     getItems: function(items){
-        console.log(items);
-        return items.map(function(item){
-            return <li>{item}</li>;
+
+        return items.map(function(item, i){
+            return <li key = {i}>{item}</li>;
         })
     },
     render: function(){
@@ -291,3 +291,63 @@ ReactDOM.render(
     document.getElementById('todoList')
 );
 
+
+
+
+// todo list with remove
+var TodoRemove = React.createClass({
+    getInitialState: function() {
+        return {
+            value: '',
+            items: []
+        };
+    },
+    remove: function(el){
+        this.setState({
+            items: this.state.items.filter(function(item){
+                return item != el;
+            })
+
+        });
+    },
+    handleChange: function(event) {
+        this.setState({value: event.target.value});
+    },
+    handleClick: function(){
+
+        this.setState({
+            items: this.state.items.concat(this.state.value),
+            value: ''
+        });
+
+    },
+    render: function() {
+        return (
+            <div>
+                <ol>
+                    {
+                        this.state.items.map(
+                            function(item, i) {
+                                return (<li key = {i}>
+                                    <span>{item}</span>
+                                    <a onClick = {this.remove.bind(this, item)}> x </a>
+                                </li>)
+                            }
+                            .bind(this)
+                        )
+                    }
+                </ol>
+                <input
+                    type="text"
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                />
+                <button onClick = {this.handleClick}>Add {this.state.items.length + 1} </button>
+            </div>
+        );
+    }
+});
+ReactDOM.render(
+    <TodoRemove/>,
+    document.getElementById('todoRemove')
+);
