@@ -3,7 +3,7 @@
 Using react with webpack
 
 
-## update node and npm
+## update node and npm (Mac OS X)
 ```
 $ brew update
 $ brew upgrade node
