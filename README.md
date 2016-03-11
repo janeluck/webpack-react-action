@@ -41,26 +41,35 @@ notes: check if there is 'babel-preset-es2015' in node_modules
 
 webpack.config.js
 ```js
+
 module.exports = {
 
-    entry:  './src',
+    entry:  __dirname + '/src',
+
     output: {
         path:     'builds',
         filename: 'bundle.js',
+        publicPath: 'builds'
     },
+
     module: {
         loaders: [
             {
                 test: /.jsx?$/,
-                loader: 'babel',
+                loader: ['babel'],
                 exclude: /node_modules/,
                 query: {
                     presets: ['es2015', 'react']
                 }
+            },
+            {
+                test: /\.html$/,
+                loader: "raw-loader"
             }
         ]
     },
 };
+
 ```
 ## run webpack
 
