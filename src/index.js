@@ -294,7 +294,7 @@ ReactDOM.render(
 
 
 
-// todo list with remove
+// todo list app with remove
 var TodoRemove = React.createClass({
     getInitialState: function() {
         return {
