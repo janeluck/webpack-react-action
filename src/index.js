@@ -13,7 +13,7 @@ var titles = [
     'It\'s Work!',
     'jane',
     names
-];
+];/*
 ReactDOM.render(
     <div>
         {titles}
@@ -240,7 +240,7 @@ ReactDOM.render(
     <UserGist source="https://api.github.com/users/octocat/gists" />,
     document.getElementById('ajaxDemo')
 );
-
+*/
 var TodoList = React.createClass({
     getItems: function(items){
 
@@ -350,4 +350,42 @@ var TodoRemove = React.createClass({
 ReactDOM.render(
     <TodoRemove/>,
     document.getElementById('todoRemove')
+);
+
+
+
+
+var Tr = React.createClass({
+    render: function() {
+        return (
+            <tr>
+                <td>a</td>
+                <td>b</td>
+                <td>c</td>
+                <td>d</td>
+            </tr>
+        )
+    }
+})
+
+
+let items = [1,2,3,4,5]
+// Table
+var Table = React.createClass({
+
+    render: function() {
+        return (
+            <table>
+                <tbody>
+                {this.props.items.map(function(item, i){
+                    return (<Tr key = {i}/>)
+                })}
+                </tbody>
+            </table>
+        );
+    }
+});
+ReactDOM.render(
+    <Table items = {items}/>,
+    document.getElementById('table')
 );
