@@ -1063,7 +1063,7 @@ let columns = [
         }
     },
     {text: '系统', datafield: 'IsSys', width: 265, cellsrenderer: function(rowData, column, value){
-        console.log(!!value);
+
         return (<div>{ value == '1' ? '是' : '否'}</div>)
 
         }
