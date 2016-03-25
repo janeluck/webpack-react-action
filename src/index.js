@@ -1058,7 +1058,8 @@ let columns = [
     {text: '创建时间', datafield: 'date', width: 160},
     {text: '状态', datafield: 'status', width: 60},
     {text: '操作', datafield: 'action', width: 265, cellsrenderer: function(rowData, column, value){
-        return (<EditBtn    deletename = '删除' ondelete = {function(){console.log(rowData); console.log(value)}}  editname = '编辑' onedit = {function(){console.log(rowData)}}/>)
+        // this -> 所在行<Tr/>
+        return (<EditBtn    deletename = '删除' ondelete = {()=>{this.refresh(Object.assign({}, rowData, {name: 'jdkaljdksa'}));console.log(rowData); console.log(value)}}  editname = '编辑' onedit = {function(){console.log(rowData)}}/>)
         }
     },
     {text: '系统', datafield: 'IsSys', width: 265, cellsrenderer: function(rowData, column, value){
@@ -1092,9 +1093,15 @@ var Td = React.createClass({
     }
 })
 var Tr = React.createClass({
-
+    getInitialState: function() {
+        return {
+            row: this.props.row
+        };
+    },
     refresh: function(row, column){
-
+        this.setState({
+            row: row
+        })
     },
     resolveRow: function(row, columns){
 
@@ -1114,7 +1121,7 @@ var Tr = React.createClass({
             <tr >
                 {
 
-                    this.resolveRow(this.props.row, this.props.columns).map(function(item, i){
+                    this.resolveRow(this.state.row, this.props.columns).map(function(item, i){
                         return (<Td text = {item.text}  key = {i} />)
                     })
                 }
