@@ -1,6 +1,7 @@
 /**
  * Created by jane on 3/5/16.
  */
+import { isPlainObject, isFunction, isString, isArray } from 'lodash'
 
 // watch index.html
 require('../index.html');
@@ -240,7 +241,7 @@ var titles = [
  <UserGist source="https://api.github.com/users/octocat/gists" />,
  document.getElementById('ajaxDemo')
  );
- */
+
 var TodoList = React.createClass({
     getItems: function(items){
 
@@ -351,9 +352,91 @@ ReactDOM.render(
     <TodoRemove/>,
     document.getElementById('todoRemove')
 );
+*/
 
 
 let items = [
+    {
+        "ID":"528",
+        "Name":"\u9500\u552e\u6708\u62a5",
+        "OwnerID":"4365",
+        "Text":{
+            "NumReport.Num1":"\u56de\u6b3e\u91d1\u989d"
+        },
+        "IsSys":"1",
+        "NpDay":"31",
+        "IsStop":"0",
+        "NpType":"month",
+        "IsDeleted":"0",
+        "ModifiedTime":"2016-03-24 16:16:10",
+        "CreatedByID":"0",
+        "CreatedTime":"2016-01-01 22:00:00",
+        "TplView":[
+            {
+                "Type":"1",
+                "DeptID":"112",
+                "ID":"528",
+                "UserID":"42349",
+                "CreatedTime":"2016-03-24 16:16:10"
+            },
+            {
+                "Type":"1",
+                "DeptID":"703",
+                "ID":"528",
+                "UserID":"54024",
+                "CreatedTime":"2016-03-24 16:16:10"
+            }
+        ],
+        "TplUp":[
+            {
+                "Type":"1",
+                "DeptID":"352",
+                "ID":"528",
+                "UserID":"19",
+                "CreatedTime":"2016-03-24 16:16:10"
+            },
+            {
+                "Type":"1",
+                "DeptID":"352",
+                "ID":"528",
+                "UserID":"21",
+                "CreatedTime":"2016-03-24 16:16:10"
+            },
+            {
+                "Type":"1",
+                "DeptID":"112",
+                "ID":"528",
+                "UserID":"42349",
+                "CreatedTime":"2016-03-24 16:16:10"
+            },
+            {
+                "Type":"1",
+                "DeptID":"703",
+                "ID":"528",
+                "UserID":"54024",
+                "CreatedTime":"2016-03-24 16:16:10"
+            },
+            {
+                "Type":"1",
+                "DeptID":"112",
+                "ID":"528",
+                "UserID":"2527",
+                "CreatedTime":"2016-03-24 16:16:10"
+            },
+            {
+                "Type":"1",
+                "DeptID":"713",
+                "ID":"528",
+                "UserID":"42390",
+                "CreatedTime":"2016-03-24 16:16:10"
+            }
+        ],
+        "NpStopTime":"2016-03-31 08:00:00",
+        "name":"\u9500\u552e\u6708\u62a5",
+        "user":"\u7cfb\u7edf",
+        "date":"2016-01-01 22:00:00",
+        "status":"0"
+    },
     {
         "ID":"528",
         "Name":"\u9500\u552e\u6708\u62a5",
@@ -664,40 +747,429 @@ let items = [
         "user":"lrb",
         "date":"2016-03-03 12:44:38",
         "status":"1"
+    },
+    {
+        "ID":"903",
+        "Name":"\u6d4b\u8bd50303",
+        "OwnerID":"65683",
+        "Text":{
+            "NumReport.Num1":"123"
+        },
+        "IsSys":"0",
+        "NpDay":"1",
+        "IsStop":"1",
+        "NpType":"day",
+        "IsDeleted":"0",
+        "ModifiedTime":"2016-03-24 15:21:56",
+        "CreatedByID":"65683",
+        "CreatedTime":"2016-03-03 12:44:38",
+        "TplView":[
+            {
+                "Type":"1",
+                "DeptID":"715",
+                "ID":"903",
+                "UserID":"65683",
+                "CreatedTime":"2016-03-03 12:44:38"
+            }
+        ],
+        "TplUp":[
+            {
+                "Type":"1",
+                "DeptID":"715",
+                "ID":"903",
+                "UserID":"65683",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"715",
+                "ID":"903",
+                "UserID":"152701",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"717",
+                "ID":"903",
+                "UserID":"17567",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"717",
+                "ID":"903",
+                "UserID":"151943",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"716",
+                "ID":"903",
+                "UserID":"14646",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"716",
+                "ID":"903",
+                "UserID":"54022",
+                "CreatedTime":"2016-03-03 12:44:38"
+            }
+        ],
+        "NpStopTime":"2016-03-24 08:00:00",
+        "name":"\u6d4b\u8bd50303",
+        "user":"lrb",
+        "date":"2016-03-03 12:44:38",
+        "status":"1"
     }
 ]
+let items0 = [
 
-var Tr = React.createClass({
-    render: function() {
+    {
+        "ID":"923",
+        "Name":"ttttt",
+        "OwnerID":"108",
+        "Text":{
+            "NumReport.Num1":"vvvv"
+        },
+        "IsSys":"0",
+        "NpDay":"1",
+        "IsStop":"1",
+        "NpType":"day",
+        "IsDeleted":"0",
+        "ModifiedTime":"2016-03-24 15:32:31",
+        "CreatedByID":"108",
+        "CreatedTime":"2016-03-14 11:06:19",
+        "TplView":[
+            {
+                "Type":"0",
+                "DeptID":"0",
+                "ID":"923",
+                "UserID":"0",
+                "CreatedTime":"2016-03-14 11:06:19"
+            }
+        ],
+        "TplUp":[
+            {
+                "Type":"0",
+                "DeptID":"0",
+                "ID":"923",
+                "UserID":"0",
+                "CreatedTime":"2016-03-14 11:06:19"
+            }
+        ],
+        "NpStopTime":"2016-03-24 08:00:00",
+        "name":"ttttt",
+        "user":"\u6881\u6bd3\u6770",
+        "date":"2016-03-14 11:06:19",
+        "status":"1"
+    },
+    {
+        "ID":"908",
+        "Name":"00",
+        "OwnerID":"4365",
+        "Text":{
+            "NumReport.Num1":"888"
+        },
+        "IsSys":"0",
+        "NpDay":"14",
+        "IsStop":"1",
+        "NpType":"month",
+        "IsDeleted":"0",
+        "ModifiedTime":"2016-03-24 15:36:24",
+        "CreatedByID":"4365",
+        "CreatedTime":"2016-03-09 16:01:56",
+        "TplView":[
+            {
+                "Type":"0",
+                "DeptID":"0",
+                "ID":"908",
+                "UserID":"0",
+                "CreatedTime":"2016-03-09 16:01:56"
+            }
+        ],
+        "TplUp":[
+            {
+                "Type":"0",
+                "DeptID":"0",
+                "ID":"908",
+                "UserID":"0",
+                "CreatedTime":"2016-03-09 16:01:56"
+            }
+        ],
+        "NpStopTime":"2016-03-31 08:00:00",
+        "name":"00",
+        "user":"\u7b80\u7389",
+        "date":"2016-03-09 16:01:56",
+        "status":"1"
+    },
+    {
+        "ID":"903",
+        "Name":"\u6d4b\u8bd50303",
+        "OwnerID":"65683",
+        "Text":{
+            "NumReport.Num1":"123"
+        },
+        "IsSys":"0",
+        "NpDay":"1",
+        "IsStop":"1",
+        "NpType":"day",
+        "IsDeleted":"0",
+        "ModifiedTime":"2016-03-24 15:21:56",
+        "CreatedByID":"65683",
+        "CreatedTime":"2016-03-03 12:44:38",
+        "TplView":[
+            {
+                "Type":"1",
+                "DeptID":"715",
+                "ID":"903",
+                "UserID":"65683",
+                "CreatedTime":"2016-03-03 12:44:38"
+            }
+        ],
+        "TplUp":[
+            {
+                "Type":"1",
+                "DeptID":"715",
+                "ID":"903",
+                "UserID":"65683",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"715",
+                "ID":"903",
+                "UserID":"152701",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"717",
+                "ID":"903",
+                "UserID":"17567",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"717",
+                "ID":"903",
+                "UserID":"151943",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"716",
+                "ID":"903",
+                "UserID":"14646",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"716",
+                "ID":"903",
+                "UserID":"54022",
+                "CreatedTime":"2016-03-03 12:44:38"
+            }
+        ],
+        "NpStopTime":"2016-03-24 08:00:00",
+        "name":"\u6d4b\u8bd50303",
+        "user":"lrb",
+        "date":"2016-03-03 12:44:38",
+        "status":"1"
+    },
+    {
+        "ID":"903",
+        "Name":"\u6d4b\u8bd50303",
+        "OwnerID":"65683",
+        "Text":{
+            "NumReport.Num1":"123"
+        },
+        "IsSys":"0",
+        "NpDay":"1",
+        "IsStop":"1",
+        "NpType":"day",
+        "IsDeleted":"0",
+        "ModifiedTime":"2016-03-24 15:21:56",
+        "CreatedByID":"65683",
+        "CreatedTime":"2016-03-03 12:44:38",
+        "TplView":[
+            {
+                "Type":"1",
+                "DeptID":"715",
+                "ID":"903",
+                "UserID":"65683",
+                "CreatedTime":"2016-03-03 12:44:38"
+            }
+        ],
+        "TplUp":[
+            {
+                "Type":"1",
+                "DeptID":"715",
+                "ID":"903",
+                "UserID":"65683",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"715",
+                "ID":"903",
+                "UserID":"152701",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"717",
+                "ID":"903",
+                "UserID":"17567",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"717",
+                "ID":"903",
+                "UserID":"151943",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"716",
+                "ID":"903",
+                "UserID":"14646",
+                "CreatedTime":"2016-03-03 12:44:38"
+            },
+            {
+                "Type":"1",
+                "DeptID":"716",
+                "ID":"903",
+                "UserID":"54022",
+                "CreatedTime":"2016-03-03 12:44:38"
+            }
+        ],
+        "NpStopTime":"2016-03-24 08:00:00",
+        "name":"\u6d4b\u8bd50303",
+        "user":"lrb",
+        "date":"2016-03-03 12:44:38",
+        "status":"1"
+    }
+]
+let columns = [
+    {text: '报表名称', datafield: 'name', width: 230},
+    {text: '创建人', datafield: 'user', width: 70},
+    {text: '创建时间', datafield: 'date', width: 160},
+    {text: '状态', datafield: 'status', width: 60},
+    {text: '操作', datafield: 'action', width: 265, cellsrenderer: function(rowData, column, value){
+        return (<EditBtn    deletename = '删除' ondelete = {function(){console.log(rowData); console.log(value)}}  editname = '编辑' onedit = {function(){console.log(rowData)}}/>)
+        }
+    },
+    {text: '系统', datafield: 'IsSys', width: 265, cellsrenderer: function(rowData, column, value){
+        console.log(!!value);
+        return (<div>{ value == '1' ? '是' : '否'}</div>)
+
+        }
+    }
+];
+var EditBtn = React.createClass({
+    render: function(){
         return (
-            <tr>
-                <td>a</td>
-                <td>b</td>
-                <td>c</td>
-                <td>d</td>
+            <div>
+            <button onClick = {this.props.onedit}>
+                {this.props.editname}
+            </button>
+            <button onClick = {this.props.ondelete}>
+                {this.props.deletename}
+            </button>
+            </div>
+        )
+    }
+})
+var Td = React.createClass({
+    render: function(){
+        return (
+            <td>
+                {this.props.text}
+            </td>
+        )
+    }
+})
+var Tr = React.createClass({
+
+    refresh: function(row, column){
+
+    },
+    resolveRow: function(row, columns){
+
+        return columns.map((col, i) => col['datafield'])
+            .map((keyName, i) =>  ({
+                keyName: keyName,
+                // 判断该列是否为自定义渲染
+                text: columns[i]['cellsrenderer'] ?  columns[i]['cellsrenderer'].call(this, row, columns[i], row[keyName]) : row[keyName]
+            })
+        )
+
+    },
+
+    render: function() {
+
+        return (
+            <tr >
+                {
+
+                    this.resolveRow(this.props.row, this.props.columns).map(function(item, i){
+                        return (<Td text = {item.text}  key = {i} />)
+                    })
+                }
             </tr>
+        )
+    }
+})
+var Thead = React.createClass({
+    render: function() {
+
+        return (
+            <thead>
+                <tr>
+            {
+                this.props.columns.map((col, i) => col['text'])
+                    .map((item, i) =>  (<th key = {i}>{item}</th>))
+            }
+                    </tr>
+            </thead>
+
         )
     }
 })
 
 
-
 // Table
 var Table = React.createClass({
-
+    getInitialState: function() {
+        return {
+            items: this.props.items
+        };
+    },
+    refresh: function(items){
+        this.setState({
+            items: items
+        })
+    },
     render: function() {
         return (
-            <table>
-                <tbody>
-                {this.props.items.map(function(item, i){
-                    return (<Tr key = {i}  />)
-                })}
-                </tbody>
-            </table>
+            <div>
+                <table>
+                    <Thead columns = {this.props.columns}/>
+                    <tbody>
+                        {
+                            this.state.items.map((item, i) => (<Tr key = {i} row =  {item}  columns = {this.props.columns} />))
+                        }
+                    </tbody>
+                </table>
+                <button onClick = {this.refresh.bind(this, items0)} >刷新</button>
+
+            </div>
         );
     }
 });
 ReactDOM.render(
-    <Table items = {items}/>,
+    <Table items = {items} columns = {columns} />,
     document.getElementById('table')
 );
