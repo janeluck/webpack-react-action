@@ -21,7 +21,7 @@ export default class Tr extends React.Component {
     constructor(props, context) {
         super(props, context);
         // 监测行数据的每个字段
-       this.state = (Object.assign({}, ...props));
+        this.state = (Object.assign({}, ...props));
     };
     render() {
 
@@ -53,9 +53,9 @@ export default class Thead extends React.Component {
         return (
 
             <thead>
-                <tr>
-                    {this.resolveColumns().map((colName, i)=><th key = {i}>{colName}</th>)}
-                </tr>
+            <tr>
+                {this.resolveColumns().map((colName, i)=><th key = {i}>{colName}</th>)}
+            </tr>
             </thead>
         )
     }
