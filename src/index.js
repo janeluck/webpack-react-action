@@ -3,6 +3,7 @@
  */
 import { isPlainObject, isFunction, isString, isArray } from 'lodash'
 import Table  from './Table/'
+
 require('./Table/table.less');
 // watch index.html
 require('../index.html');
@@ -16,6 +17,21 @@ var titles = [
     'jane',
     names
 ];
+var EditBtn = React.createClass({
+    render: function(){
+        return (
+            <div>
+                <button onClick = {this.props.onedit}>
+                    {this.props.editname}
+                </button>
+                <button onClick = {this.props.ondelete}>
+                    {this.props.deletename}
+                </button>
+            </div>
+        )
+    }
+})
+
 let items = [
     {
         "ID":"528",
@@ -1398,10 +1414,20 @@ let columns = [
     {text: '报表名称', datafield: 'name', width: 230},
     {text: '创建人', datafield: 'user', width: 70},
     {text: '创建时间', datafield: 'date', width: 160},
-    {text: '状态', datafield: 'status', width: 60},
-    {text: '操作', datafield: 'action', width: 265, cellsrenderer: function(rowData, column, value){
+    {text: '状态', datafield: 'IsStop', width: 60, cellsrenderer: function(rowData, column, value){
+        return value == 0 ? '启动' : '停止'
+    }},
+    {text: '操作', datafield: 'ID', width: 265, cellsrenderer: function(rowData, column, value){
         // this -> 所在行<Tr/>
-        return (<EditBtn    deletename = '删除' ondelete = {()=>{this.refresh(Object.assign({}, rowData, {name: 'jdkaljdksa'}));console.log(rowData); console.log(value)}}  editname = '编辑' onedit = {function(){console.log(rowData)}}/>)
+        return (
+            <div>
+                <button onClick = {(e) => {alert('ID:' + value)}}>详情</button>
+                <button onClick = {(e) =>{this.refresh(Object.assign({}, rowData, {IsStop: rowData.IsStop ^ 1 }))} }>{rowData.IsStop == 1 ? '启用' : '停止' }</button>
+                <button>复制新建</button>
+            </div>
+
+        )
+        //return (<EditBtn    deletename = '删除' ondelete = {()=>{this.refresh(Object.assign({}, rowData, {name: 'jdkaljdksa'}));}}  editname = '编辑' onedit = {function(){console.log(rowData)}}/>)
     }
     },
     {text: '系统', datafield: 'IsSys', width: 265, cellsrenderer: function(rowData, column, value){
@@ -1411,7 +1437,7 @@ let columns = [
     }
     }
 ];
-console.log(items.length)
+
 /*
  ReactDOM.render(
  <div>
@@ -1754,20 +1780,7 @@ ReactDOM.render(
 
 
 
-var EditBtn = React.createClass({
-    render: function(){
-        return (
-            <div>
-            <button onClick = {this.props.onedit}>
-                {this.props.editname}
-            </button>
-            <button onClick = {this.props.ondelete}>
-                {this.props.deletename}
-            </button>
-            </div>
-        )
-    }
-})
+
 var Td = React.createClass({
     render: function(){
         return (
@@ -1875,3 +1888,4 @@ let table = ReactDOM.render(
     />,
     document.getElementById('table')
 );
+document.getElementById('refreshTable').onclick = table.refresh;
