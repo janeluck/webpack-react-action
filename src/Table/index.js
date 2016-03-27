@@ -741,10 +741,18 @@ export default class Td extends React.Component {
 export default class Tr extends React.Component {
     constructor(props, context) {
         super(props, context);
+        this.state = {
+            isSelected: false
+        }
         this.refresh = this.refresh.bind(this)
 
     };
-
+    selectModeCheckbox(selectMode){
+        if (selectMode) {
+            return (<th>pp</th>)
+        }
+        return ''
+    }
 
     refresh(rowData){
         // 子->父组件通信
@@ -768,6 +776,7 @@ export default class Tr extends React.Component {
         return (
 
             <tr>
+               <th><input type="checkbox"/></th>
                 {
                 this.resolveRow(this.props.row).map(function (item, i) {
                         return (<Td text={item.text} key={i}/>)
@@ -791,7 +800,12 @@ export default class Thead extends React.Component {
          */
         return this.props.columns.map((col, i) => col['text'])
     }
-
+    selectModeCheckbox(selectMode){
+        if (selectMode) {
+            return (<th>pp</th>)
+        }
+        return ''
+    }
     render() {
 
 
@@ -799,7 +813,10 @@ export default class Thead extends React.Component {
 
             <thead>
             <tr>
+
+                <th><input type="checkbox"/></th>
                 {this.resolveColumnsTitle().map((colName, i)=><th key = {i}>{colName}</th>)}
+
             </tr>
             </thead>
         )
@@ -819,7 +836,7 @@ export default class Tbody extends React.Component {
 
             <tbody>
 
-            {this.props.rows.map((row, i) => (<Tr index = {i} onRowChange = {this.props.onRowChange} columns = {this.props.columns} row = {row} key = {i}/>))}
+            {this.props.rows.map((row, i) => (<Tr selectMode = {this.props.selectMode} index = {i} onRowChange = {this.props.onRowChange} columns = {this.props.columns} row = {row} key = {i}/>))}
 
             </tbody>
         )
@@ -868,8 +885,8 @@ export default class Table extends React.Component {
 
             <div>
                 <table>
-                    <Thead columns = {this.state.columns}/>
-                    <Tbody rows =  {this.state.rows} columns = {this.state.columns} onRowChange = {this.onRowChange.bind(this)}/>
+                    <Thead columns = {this.state.columns} selectedMode={this.props.selectedMode}/>
+                    <Tbody selectedMode={this.props.selectMode} rows =  {this.state.rows} columns = {this.state.columns} onRowChange = {this.onRowChange.bind(this)}/>
 
                 </table>
 
@@ -881,5 +898,9 @@ export default class Table extends React.Component {
 
 Table.propTypes = {
     columns: React.PropTypes.array.isRequired,
-    rows: React.PropTypes.array.isRequired
+    rows: React.PropTypes.array.isRequired,
+    selectMode: React.PropTypes.bool
+}
+Table.defaultProps = {
+    selectMode: false
 }

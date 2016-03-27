@@ -1881,10 +1881,12 @@ ReactDOM.render(
 
 */
 
+
 let table = ReactDOM.render(
     <Table
         columns = {columns}
         rows = {items}
+        selectMode = {true}
     />,
     document.getElementById('table')
 );
