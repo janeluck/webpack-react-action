@@ -1890,4 +1890,4 @@ let table = ReactDOM.render(
     />,
     document.getElementById('table')
 );
-document.getElementById('refreshTable').onclick = table.refresh;
+document.getElementById('refreshTable').onclick = table.refreshPage;

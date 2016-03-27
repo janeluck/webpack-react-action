@@ -836,7 +836,16 @@ export default class Tbody extends React.Component {
 
             <tbody>
 
-            {this.props.rows.map((row, i) => (<Tr selectMode = {this.props.selectMode} index = {i} onRowChange = {this.props.onRowChange} columns = {this.props.columns} row = {row} key = {i}/>))}
+            {this.props.rows.map((row, i) => (
+                <Tr
+                    selectMode = {this.props.selectMode}
+                    index = {i}
+                    onRowChange = {this.props.onRowChange}
+                    columns = {this.props.columns}
+                    row = {row}
+                    key = {i}
+                />
+            ))}
 
             </tbody>
         )
@@ -851,18 +860,25 @@ export default class Table extends React.Component {
         // 暂时未用到, 考虑到以后的列数, 行数据可变
         this.state = {
             columns: this.props.columns,
-            rows: this.props.rows
+            rows: this.props.rows,
+            selected: []
         };
-        this.refresh = this.refresh.bind(this)
+        this.refreshPage = this.refreshPage.bind(this)
         this.getRow = this.getRow.bind(this)
         this.onRowChange = this.onRowChange.bind(this)
+        this.onRowSelected = this.onRowSelected.bind(this)
     }
 
-    refresh() {
-        this.setState({rows: getRowData()})
+    refreshPage() {
+        this.setState({
+            rows: getRowData(),
+            selected: []
+        })
 
     }
+    onRowSelected(i){
 
+    }
     onRowChange(row, i){
         // setState是异步的
         this.setState(
@@ -885,8 +901,16 @@ export default class Table extends React.Component {
 
             <div>
                 <table>
-                    <Thead columns = {this.state.columns} selectedMode={this.props.selectedMode}/>
-                    <Tbody selectedMode={this.props.selectMode} rows =  {this.state.rows} columns = {this.state.columns} onRowChange = {this.onRowChange.bind(this)}/>
+                    <Thead columns = {this.state.columns}
+                           selectedMode = {this.props.selectedMode}
+                           selectedRows = {this.state.selected}
+                    />
+                    <Tbody selectedRows = {this.state.selected}
+                           selectedMode = {this.props.selectMode}
+                           rows = {this.state.rows}
+                           columns = {this.state.columns}
+                           onRowChange = {this.onRowChange.bind(this)}
+                    />
 
                 </table>
 
