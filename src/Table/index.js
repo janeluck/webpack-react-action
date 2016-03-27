@@ -911,7 +911,7 @@ export default class Table extends React.Component {
         this.refreshPage = this.refreshPage.bind(this)
         this.getRow = this.getRow.bind(this)
         this.onRowChange = this.onRowChange.bind(this)
-        this.onRowSelected = this.onRowSelected.bind(this)
+        this.onRowChecked = this.onRowChecked.bind(this)
     }
 
     refreshPage() {
