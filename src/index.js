@@ -1886,7 +1886,7 @@ let table = ReactDOM.render(
     <Table
         columns = {columns}
         rows = {items}
-        selectMode = {true}
+        checkMode = {true}
     />,
     document.getElementById('table')
 );

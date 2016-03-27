@@ -3,6 +3,8 @@
  */
 import Immutable from 'immutable'
 import { isPlainObject, isFunction, isString, isArray } from 'lodash'
+
+
 // todo: 样式的默认值和自定义
 var React = require('react');
 let arr = [
@@ -722,10 +724,32 @@ let arr = [
         "status":"0"
     }
 ];
+
 function getRowData(){
     return arr.reverse()
 }
 
+
+class Checkbox extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = {
+            isChecked: false
+        }
+        this._changeState = this._changeState.bind(this)
+
+    }
+    _changeState(){
+        this.setState({isChecked: !this.state.isChecked})
+
+    }
+    render(){
+        return (
+            <input  onChange = {this._changeState} type="checkbox" checked = {this.state.isChecked}/>
+        )
+    }
+}
 
 export default class Td extends React.Component {
 
@@ -738,20 +762,33 @@ export default class Td extends React.Component {
         )
     }
 }
+
 export default class Tr extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            isSelected: false
-        }
+            isChecked: false
+        };
         this.refresh = this.refresh.bind(this)
+        this.renderCheckbox = this.renderCheckbox.bind(this)
 
-    };
-    selectModeCheckbox(selectMode){
-        if (selectMode) {
-            return (<th>pp</th>)
+    }
+
+
+
+    renderCheckbox(checkMode){
+
+        if (checkMode) {
+            return (
+                <td>
+                <Checkbox isChecked = {this.props.row} />
+                </td>
+            )
         }
-        return ''
+
+
+        return  null
+
     }
 
     refresh(rowData){
@@ -776,9 +813,12 @@ export default class Tr extends React.Component {
         return (
 
             <tr>
-               <th><input type="checkbox"/></th>
+                
+                {   this.renderCheckbox(this.props.checkMode)}
+                
+
                 {
-                this.resolveRow(this.props.row).map(function (item, i) {
+                    this.resolveRow(this.props.row).map(function (item, i) {
                         return (<Td text={item.text} key={i}/>)
                     })
                 }
@@ -791,8 +831,18 @@ export default class Thead extends React.Component {
 
     constructor(props, context) {
         super(props, context);
+        this.renderCheckbox = this.renderCheckbox.bind(this)
 
     };
+    renderCheckbox(checkMode){
+
+        return checkMode ? (<th><input type="checkbox"/></th>) : null
+        if (checkMode) {
+            return (<th><input type="checkbox"/></th>)
+        }
+        return null
+    }
+
     resolveColumnsTitle(){
         //todo: 判断字段hidden是否存在和其的值
         /* 返回表头文本数组
@@ -800,12 +850,7 @@ export default class Thead extends React.Component {
          */
         return this.props.columns.map((col, i) => col['text'])
     }
-    selectModeCheckbox(selectMode){
-        if (selectMode) {
-            return (<th>pp</th>)
-        }
-        return ''
-    }
+
     render() {
 
 
@@ -814,7 +859,7 @@ export default class Thead extends React.Component {
             <thead>
             <tr>
 
-                <th><input type="checkbox"/></th>
+                {this.renderCheckbox(this.props.checkMode)}
                 {this.resolveColumnsTitle().map((colName, i)=><th key = {i}>{colName}</th>)}
 
             </tr>
@@ -838,7 +883,7 @@ export default class Tbody extends React.Component {
 
             {this.props.rows.map((row, i) => (
                 <Tr
-                    selectMode = {this.props.selectMode}
+                    checkMode = {this.props.checkMode}
                     index = {i}
                     onRowChange = {this.props.onRowChange}
                     columns = {this.props.columns}
@@ -851,6 +896,7 @@ export default class Tbody extends React.Component {
         )
     }
 }
+
 export default class Table extends React.Component {
 
 
@@ -860,8 +906,7 @@ export default class Table extends React.Component {
         // 暂时未用到, 考虑到以后的列数, 行数据可变
         this.state = {
             columns: this.props.columns,
-            rows: this.props.rows,
-            selected: []
+            rows: this.props.rows
         };
         this.refreshPage = this.refreshPage.bind(this)
         this.getRow = this.getRow.bind(this)
@@ -871,13 +916,13 @@ export default class Table extends React.Component {
 
     refreshPage() {
         this.setState({
-            rows: getRowData(),
-            selected: []
+            rows: getRowData()
+
         })
 
     }
-    onRowSelected(i){
-
+    onRowChecked(i){
+        console.log(i)
     }
     onRowChange(row, i){
         // setState是异步的
@@ -891,8 +936,7 @@ export default class Table extends React.Component {
     }
     getRow() {
         console.log(this.state.rows)
-
-
+        
     }
     render() {
 
@@ -902,14 +946,15 @@ export default class Table extends React.Component {
             <div>
                 <table>
                     <Thead columns = {this.state.columns}
-                           selectedMode = {this.props.selectedMode}
-                           selectedRows = {this.state.selected}
+                           checkMode = {this.props.checkMode}
+                           onRowChecked = {this.onRowChecked.bind(this)}
                     />
-                    <Tbody selectedRows = {this.state.selected}
-                           selectedMode = {this.props.selectMode}
+                    <Tbody
+                           checkMode = {this.props.checkMode}
                            rows = {this.state.rows}
                            columns = {this.state.columns}
                            onRowChange = {this.onRowChange.bind(this)}
+                           onRowChecked = {this.onRowChecked.bind(this)}
                     />
 
                 </table>
@@ -923,8 +968,8 @@ export default class Table extends React.Component {
 Table.propTypes = {
     columns: React.PropTypes.array.isRequired,
     rows: React.PropTypes.array.isRequired,
-    selectMode: React.PropTypes.bool
+    checkMode: React.PropTypes.bool
 }
 Table.defaultProps = {
-    selectMode: false
+    checkMode: false
 }
