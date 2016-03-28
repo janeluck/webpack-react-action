@@ -883,10 +883,12 @@ export default class Table extends React.Component {
 
     }
 
+
     // 页面数据刷新接口，可用于翻页等
     refreshPage() {
         this.setState({
-            rows: getRowData()
+            rows: getRowData(),
+            checkedRows: new Set()
         })
 
     }
@@ -959,7 +961,7 @@ export default class Table extends React.Component {
                     <Thead columns = {this.state.columns}
                            checkMode = {this.props.checkMode}
                            onAllChecked = {this.onAllChecked.bind(this)}
-                           isAllchecked = {this.state.checkedRows.size === this.props.rows.length}
+                           isAllchecked = {this.state.checkedRows.size === this.state.rows.length}
                     />
                     <tbody>
 
