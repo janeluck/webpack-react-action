@@ -742,11 +742,13 @@ class Checkbox extends React.Component {
     }
     _changeState(){
         this.setState({isChecked: !this.state.isChecked})
+        // 可换成dispatch
+        this.props.onRowChecked()
 
     }
     render(){
         return (
-            <input  onChange = {this._changeState} type="checkbox" checked = {this.state.isChecked}/>
+            <input   onChange = {this._changeState} type="checkbox" checked = {this.state.isChecked}/>
         )
     }
 }
@@ -767,21 +769,30 @@ export default class Tr extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            isChecked: false
+            isChecked: this.props.isOnChecked
         };
         this.refresh = this.refresh.bind(this)
         this.renderCheckbox = this.renderCheckbox.bind(this)
+        this.checkedToggle = this.checkedToggle.bind(this)
 
     }
 
 
+    checkedToggle(index){
+        let newState = !this.state.isChecked
+        this.setState({isChecked:  newState})
+        // 可换成dispatch
+
+        this.props.onRowChecked(index, newState)
+    }
 
     renderCheckbox(checkMode){
 
         if (checkMode) {
             return (
                 <td>
-                <Checkbox isChecked = {this.props.row} />
+                    <input   onChange = {this.checkedToggle.bind(this,this.props.index)} type="checkbox" checked = {this.state.isChecked}/>
+
                 </td>
             )
         }
@@ -831,14 +842,27 @@ export default class Thead extends React.Component {
 
     constructor(props, context) {
         super(props, context);
+        this.state = {
+            isChecked: this.props.isAllchecked
+        };
         this.renderCheckbox = this.renderCheckbox.bind(this)
+        this.checkedToggle = this.checkedToggle.bind(this)
 
     };
+
+    checkedToggle(){
+        let newState = !this.state.isChecked
+        this.setState({isChecked:  newState})
+        // 可换成dispatch
+
+        this.props.onAllChecked(newState)
+    }
+
     renderCheckbox(checkMode){
 
-        return checkMode ? (<th><input type="checkbox"/></th>) : null
+
         if (checkMode) {
-            return (<th><input type="checkbox"/></th>)
+            return (<th><input onChange = {this.checkedToggle.bind(this)} type="checkbox" checked = {this.state.isChecked}/></th>)
         }
         return null
     }
@@ -886,6 +910,7 @@ export default class Tbody extends React.Component {
                     checkMode = {this.props.checkMode}
                     index = {i}
                     onRowChange = {this.props.onRowChange}
+                    onRowChecked = {this.props.onRowChecked}
                     columns = {this.props.columns}
                     row = {row}
                     key = {i}
@@ -904,15 +929,21 @@ export default class Table extends React.Component {
     constructor(props, context) {
         super(props, context);
         // 暂时未用到, 考虑到以后的列数, 行数据可变
+
+
+
         this.state = {
             columns: this.props.columns,
-            rows: this.props.rows
+            rows: this.props.rows,
+            checkedRows: new Set()
         };
         this.refreshPage = this.refreshPage.bind(this)
         this.getRow = this.getRow.bind(this)
         this.onRowChange = this.onRowChange.bind(this)
         this.onRowChecked = this.onRowChecked.bind(this)
     }
+
+
 
     refreshPage() {
         this.setState({
@@ -921,8 +952,43 @@ export default class Table extends React.Component {
         })
 
     }
-    onRowChecked(i){
-        console.log(i)
+
+    // 全选按钮
+    onAllChecked(isChecked){
+        let newState = this.state.checkedRows
+        console.log(1)
+        if (isChecked) {
+            for(let i = 0; i< this.state.rows; i++){
+
+                newState.add(i);
+            }
+        } else {
+            newState.clear()
+
+        }
+
+
+        this.setState({
+            checkedRows: newState
+
+        })
+        setTimeout(function(){console.log(this.state.checkedRows)}.bind(this))
+    }
+
+    onRowChecked(i, isChecked){
+
+        let newState = this.state.checkedRows
+
+
+        isChecked ? newState.add(i) : newState.delete(i)
+
+
+
+        this.setState({
+            checkedRows: newState
+        })
+
+        setTimeout(function(){console.log(this.state.checkedRows)}.bind(this))
     }
     onRowChange(row, i){
         // setState是异步的
@@ -943,19 +1009,42 @@ export default class Table extends React.Component {
 
         return (
 
+
             <div>
+
+
                 <table>
+
+
+
                     <Thead columns = {this.state.columns}
                            checkMode = {this.props.checkMode}
-                           onRowChecked = {this.onRowChecked.bind(this)}
+                           onAllChecked = {this.onAllChecked.bind(this)}
+                           isAllchecked = {this.state.checkedRows.size === this.state.rows.length}
                     />
-                    <Tbody
+                    <tbody>
+
+                    {this.state.rows.map((row, i) => (
+                        <Tr
+                            checkMode = {this.props.checkMode}
+                            index = {i}
+                            onRowChange = {this.onRowChange.bind(this)}
+                            onRowChecked = {this.onRowChecked.bind(this)}
+                            columns = {this.props.columns}
+                            row = {row}
+                            key = {i}
+                            isOnChecked = {row.__isChecked}
+                        />
+                    ))}
+                    </tbody>
+                    { /* <Tbody
                            checkMode = {this.props.checkMode}
                            rows = {this.state.rows}
                            columns = {this.state.columns}
                            onRowChange = {this.onRowChange.bind(this)}
                            onRowChecked = {this.onRowChecked.bind(this)}
-                    />
+                           checkedStatus = {this.state.checkedRows}
+                    />*/}
 
                 </table>
 
