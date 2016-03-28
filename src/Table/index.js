@@ -779,7 +779,7 @@ export default class Tr extends React.Component {
     }
 
     refresh(rowData){
-        // 子->父组件通信
+        // 子->父组件通信 todo: 把上下文换成Table
         this.props.onRowChange(rowData, this.props.index)
     }
     // 解析需要展示的列, 并从row中取出字段对应内容(文本或者虚拟dom)
@@ -971,7 +971,7 @@ export default class Table extends React.Component {
                             index = {i}
                             onRowChange = {this.onRowChange.bind(this)}
                             onRowChecked = {this.onRowChecked.bind(this)}
-                            columns = {this.props.columns}
+                            columns = {this.state.columns}
                             row = {row}
                             key = {i}
                             isOnChecked = {this.state.checkedRows.has(i)}
