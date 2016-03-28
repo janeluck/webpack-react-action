@@ -1891,3 +1891,6 @@ let table = ReactDOM.render(
     document.getElementById('table')
 );
 document.getElementById('refreshTable').onclick = table.refreshPage;
+document.getElementById('getCheckedRows').onclick = function(){
+    console.log(table.getCheckedRows())
+};

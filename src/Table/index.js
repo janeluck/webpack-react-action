@@ -877,7 +877,7 @@ export default class Table extends React.Component {
             checkedRows: new Set()
         };
         this.refreshPage = this.refreshPage.bind(this)
-        this.getRow = this.getRow.bind(this)
+        this.getCheckedRows = this.getCheckedRows.bind(this)
         this.onRowChange = this.onRowChange.bind(this)
         this.onRowChecked = this.onRowChecked.bind(this)
 
@@ -936,9 +936,19 @@ export default class Table extends React.Component {
 
     }
 
-    getRow() {
-        console.log(this.state.rows)
-        
+    // 获取已选中的行， 返回行索引和行数据
+    getCheckedRows() {
+
+        let obj = []
+        for ( let i of this.state.checkedRows.values() ){
+
+            obj.push({
+                index: i,
+                rowData: this.state.rows[i]
+            })
+        }
+
+        return obj
     }
     render() {
 
