@@ -789,7 +789,7 @@ export default class Tr extends React.Component {
             .map((keyName, i) =>  ({
                     keyName: keyName,
                     // 判断该列是否为自定义渲染
-                    text: this.props.columns[i]['cellsrenderer'] ?  this.props.columns[i]['cellsrenderer'].call(this, row, this.props.columns[i], row[keyName]) : row[keyName]
+                    text: isFunction(this.props.columns[i]['cellsrenderer']) ?  this.props.columns[i]['cellsrenderer'].call(this, row, this.props.columns[i], row[keyName]) : row[keyName]
                 })
             )
 
