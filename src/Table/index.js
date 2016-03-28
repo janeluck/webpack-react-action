@@ -866,46 +866,10 @@ export default class Thead extends React.Component {
         )
     }
 }
-/*export default class Tbody extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-
-
-    };
-
-    render() {
-
-
-        return (
-
-            <tbody>
-
-            {this.props.rows.map((row, i) => (
-                <Tr
-                    checkMode = {this.props.checkMode}
-                    index = {i}
-                    onRowChange = {this.props.onRowChange}
-                    onRowChecked = {this.props.onRowChecked}
-                    columns = {this.props.columns}
-                    row = {row}
-                    key = {i}
-                />
-            ))}
-
-            </tbody>
-        )
-    }
-}*/
-
 export default class Table extends React.Component {
 
-
-
     constructor(props, context) {
         super(props, context);
-        // 暂时未用到, 考虑到以后的列数, 行数据可变
-
-
 
         this.state = {
             columns: this.props.columns,
@@ -919,12 +883,10 @@ export default class Table extends React.Component {
 
     }
 
-
-
+    // 页面数据刷新接口，可用于翻页等
     refreshPage() {
         this.setState({
             rows: getRowData()
-
         })
 
     }
@@ -935,14 +897,12 @@ export default class Table extends React.Component {
 
         if (isChecked) {
             for(let i = 0; i< this.state.rows.length; i++){
-
                 newState.add(i);
             }
         } else {
             newState.clear()
 
         }
-
 
         this.setState({
             checkedRows: newState
@@ -983,14 +943,8 @@ export default class Table extends React.Component {
     render() {
 
         return (
-
-
             <div>
-
-
                 <table>
-
-
 
                     <Thead columns = {this.state.columns}
                            checkMode = {this.props.checkMode}
@@ -1012,14 +966,7 @@ export default class Table extends React.Component {
                         />
                     ))}
                     </tbody>
-                    { /* <Tbody
-                           checkMode = {this.props.checkMode}
-                           rows = {this.state.rows}
-                           columns = {this.state.columns}
-                           onRowChange = {this.onRowChange.bind(this)}
-                           onRowChecked = {this.onRowChecked.bind(this)}
-                           checkedStatus = {this.state.checkedRows}
-                    />*/}
+
 
                 </table>
 
