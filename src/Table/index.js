@@ -856,10 +856,16 @@ export default class Thead extends React.Component {
         return (
 
             <thead>
+                
             <tr>
 
                 {this.renderCheckbox(this.props.checkMode)}
                 {this.resolveColumnsTitle().map((colName, i)=><th key = {i}>{colName}</th>)}
+
+            </tr>
+            <tr>
+                <th></th>
+                {this.resolveColumnsTitle().map((colName, i)=><th key={i}><nput type="text"/></th>)}
 
             </tr>
             </thead>
@@ -956,6 +962,7 @@ export default class Table extends React.Component {
 
         return (
             <div>
+                <button>高级搜索</button>
                 <table>
 
                     <Thead columns = {this.state.columns}
