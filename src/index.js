@@ -1229,12 +1229,12 @@ let searchColumns = {
                     default: true
                 },
                 {
-                    text: '启动',
+                    text: '是',
                     value: 1,
                     default: false
                 },
                 {
-                    text: '停止',
+                    text: '否',
                     value: 0,
                     default: false
                 }

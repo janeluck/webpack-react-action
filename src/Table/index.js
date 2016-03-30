@@ -4,7 +4,6 @@
 import Immutable from 'immutable'
 import { isPlainObject, isFunction, isString, isArray } from 'lodash'
 
-
 // todo: 样式的默认值和自定义
 var React = require('react');
 let arr = [
@@ -878,17 +877,32 @@ export default class Table extends React.Component {
         this.state = {
             columns: this.props.columns,
             rows: this.props.rows,
-            checkedRows: new Set()
+            checkedRows: new Set(),
+            showSearch: false
         };
         this.refreshPage = this.refreshPage.bind(this)
         this.getCheckedRows = this.getCheckedRows.bind(this)
         this.onRowChange = this.onRowChange.bind(this)
         this.onRowChecked = this.onRowChecked.bind(this)
         this.renderSearch = this.renderSearch.bind(this)
+        this.showSearchBar = this.showSearchBar.bind(this)
+        this.search = this.search.bind(this)
 
     }
 
-
+    showSearchBar(){
+        this.setState({
+            showSearch: true
+        })
+    }
+    search(){
+        this.setState({
+            showSearch: false
+        })
+        // 获取到搜索栏表单数据
+        console.log(document.querySelectorAll('[name^="search-"]'));
+        this.refreshPage()
+    }
     // 页面数据刷新接口，可用于翻页等
     refreshPage() {
         this.setState({
@@ -966,11 +980,11 @@ export default class Table extends React.Component {
         // todo: 拆分
         switch (obj.searchType || 0) {
             case 1:
-                return (<input type="text" data-keyname = {datafield} ref = 'searchComponents'/>)
+                return (<input type="text" name = {'search-'+datafield} />)
             case 2:
-                return (<input type="datetime-local" data-keyname = {datafield} ref = 'searchComponents'/>)
+                return (<input type="datetime-local" name = {'search-'+datafield} />)
             case 3:
-                return (<select data-keyname = {datafield} ref = 'searchComponents'>
+                return (<select name = {'search-'+datafield} >
                     {obj.renderData.options.map((item, i) => (<option key = {i} value={item.value}>{item.text}</option>))}
                 </select>)
         }
@@ -980,8 +994,9 @@ export default class Table extends React.Component {
 
         return (
             <div>
-                <button>高级搜索</button>
-                <button onClick = {()=>{}}>确定</button>
+                <button onClick = {this.showSearchBar}>高级搜索</button>
+                {/*获取高级搜索栏中的表单条目*/}
+                <button onClick = {this.search} className = {this.state.showSearch ? '' : 'hide'}  >确定</button>
                 <table >
 
                     <Thead columns = {this.state.columns}
@@ -990,7 +1005,7 @@ export default class Table extends React.Component {
                            isAllchecked = {this.state.checkedRows.size === this.state.rows.length}
                     />
                     <tbody>
-                    <tr>
+                    <tr className = {this.state.showSearch ? '' : 'hide'}>
                         {/* todo:判断checkMode*/}
                         <td></td>
 
