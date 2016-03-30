@@ -899,7 +899,7 @@ export default class Table extends React.Component {
         this.setState({
             showSearch: false
         })
-        // 获取到搜索栏表单数据
+        // 获取到搜索栏表单数据 todo: 有没有更高效的方式, 通过虚拟DOM?
         console.log(document.querySelectorAll('[name^="search-"]'));
         this.refreshPage()
     }
@@ -1060,3 +1060,5 @@ Table.defaultProps = {
     searchMode: false
 
 }
+
+
