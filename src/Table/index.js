@@ -971,7 +971,23 @@ export default class Table extends React.Component {
                            isAllchecked = {this.state.checkedRows.size === this.state.rows.length}
                     />
                     <tbody>
+                    <tr>
+                        <td></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                    </tr>
 
+                </tbody>
+
+               </table>
+
+                <table>
+
+                    <tbody>
                     {this.state.rows.map((row, i) => (
                         <Tr
                             checkMode = {this.props.checkMode}
@@ -986,8 +1002,10 @@ export default class Table extends React.Component {
                     ))}
                     </tbody>
 
-
                 </table>
+
+
+
 
             </div>
         )
