@@ -757,8 +757,6 @@ export default class Tr extends React.Component {
 
     checkedToggle(index){
 
-
-
         this.props.onRowChecked(index, !this.props.isOnChecked)
     }
 
@@ -960,25 +958,30 @@ export default class Table extends React.Component {
         return obj
     }
 
-    renderSearch(searchType) {
-        switch (searchType || 0) {
-            case 1:
-                return (<input type="text"/>)
-            case 2:
-                return (<select>
-                    <option>0</option>
-                    <option>1</option>
-                </select>)
+    renderSearch(datafield) {
 
+        let obj = this.props.searchColumns[datafield];
+        if (typeof obj === 'undefined' ) return null
+
+        // todo: 拆分
+        switch (obj.searchType || 0) {
+            case 1:
+                return (<input type="text" data-keyname = {datafield} ref = 'searchComponents'/>)
+            case 2:
+                return (<input type="datetime-local" data-keyname = {datafield} ref = 'searchComponents'/>)
+            case 3:
+                return (<select data-keyname = {datafield} ref = 'searchComponents'>
+                    {obj.renderData.options.map((item, i) => (<option key = {i} value={item.value}>{item.text}</option>))}
+                </select>)
         }
-        return (<input type="text"/>)
+        return null
     }
     render() {
 
         return (
             <div>
                 <button>高级搜索</button>
-                <button>确定</button>
+                <button onClick = {()=>{}}>确定</button>
                 <table >
 
                     <Thead columns = {this.state.columns}
@@ -992,7 +995,7 @@ export default class Table extends React.Component {
                         <td></td>
 
 
-                        {this.state.columns.map((item, i) => (<th  key = {i}>{this.renderSearch(item.searchType)}</th>))}
+                        {this.state.columns.map((item, i) => (<th  key = {i}>{this.renderSearch(item.datafield)}</th>))}
 
                     </tr>
 
@@ -1031,7 +1034,7 @@ export default class Table extends React.Component {
 
 Table.propTypes = {
     columns: React.PropTypes.array.isRequired,
-    searchColumns: React.PropTypes.array.isRequired,
+
     rows: React.PropTypes.array.isRequired,
     checkMode: React.PropTypes.bool,
     searchMode: React.PropTypes.bool,

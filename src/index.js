@@ -1177,9 +1177,8 @@ let items = [
     }
 ];
 
-/*
-* #渲染高级搜索单元格数据格式
-* searchColumns的datafield和columns的datafield字段相对应
+/** #渲染高级搜索单元格数据格式
+*
 * searchType(待完善)
 *   0: 该字段不支持搜索
 *   1: input类型
@@ -1187,34 +1186,77 @@ let items = [
 *   3: select类型
 * renderData里面存放渲染单元格所需要的数据
 *
-*
-*
-* 考虑到性能问题, 可思考另外一种组织方式
-* [
-*   name: {
-*       searchType: 1
-*   },
-*
-*   date: {
-*       searchType: 2
-*       renderData: {
-*           startTime: '20160101',
-*           endTime: '20160301'
+**/
+let searchColumns = {
+    name: {
+        searchType: 1
+    },
+    user: {
+        searchType: 1
+    },
+    IsStop: {
+        searchType: 3,
+        renderData: {
+            options:[
+                {
+                    text: '全部',
+                    // Notes: 该条目0和1被占用,以后类似情况约定0为全部
+                    value: -1,
+                    default: true
+                },
+                {
+                    text: '启动',
+                    value: 1,
+                    default: false
+                },
+                {
+                    text: '停止',
+                    value: 0,
+                    default: false
+                }
+
+            ]
         }
-*   },
-*
-*   IsStop:{
-*       searchType: 3
-*       ....
-*   }
-* ]
-* * */
+    },
+    IsSys: {
+        searchType: 3,
+        renderData: {
+            options:[
+                {
+                    text: '全部',
+                    // Notes: 该条目0和1被占用,以后类似情况约定0为全部
+                    value: -1,
+                    default: true
+                },
+                {
+                    text: '启动',
+                    value: 1,
+                    default: false
+                },
+                {
+                    text: '停止',
+                    value: 0,
+                    default: false
+                }
 
+            ]
+        }
+    },
+    date: {
+        searchType: 2,
+        renderData: {
+            startTime: '20160101',
+            endTime: '20160301'
+        }
+    }
 
-
-
-
-let searchColumns = [
+}
+/*
+* 下面这种数据格式更清晰明了
+* searchColumns的datafield和columns的datafield字段相对应
+* 这种方式会有两层遍历导致的性能问题
+* */
+/*let searchColumns = [
     {
         datafield: 'name',
         searchType: 1
@@ -1287,17 +1329,17 @@ let searchColumns = [
         }
     }
 
-];
+];*/
 
 // table所用的列信息
 let columns = [
-    {text: '报表名称', datafield: 'name', width: 230, searchType: 0},
-    {text: '创建人', datafield: 'user', width: 70, searchType:1},
-    {text: '创建时间', datafield: 'date', width: 160, searchType:2},
-    {text: '状态', datafield: 'IsStop', width: 60, searchType:3, cellsrenderer: function(rowData, column, value){
+    {text: '报表名称', datafield: 'name', width: 230},
+    {text: '创建人', datafield: 'user', width: 70},
+    {text: '创建时间', datafield: 'date', width: 160},
+    {text: '状态', datafield: 'IsStop', width: 60, cellsrenderer: function(rowData, column, value){
         return value == 0 ? '启动' : '停止'
     }},
-    {text: '操作', datafield: 'ID', width: 265,searchType:0, cellsrenderer: function(rowData, column, value){
+    {text: '操作', datafield: 'ID', width: 265, cellsrenderer: function(rowData, column, value){
         // this -> 所在行<Tr/>
         return (
             <div>
@@ -1310,7 +1352,7 @@ let columns = [
         //return (<EditBtn    deletename = '删除' ondelete = {()=>{this.refresh(Object.assign({}, rowData, {name: 'jdkaljdksa'}));}}  editname = '编辑' onedit = {function(){console.log(rowData)}}/>)
     }
     },
-    {text: '系统', datafield: 'IsSys', width: 265,searchType:0, cellsrenderer: function(rowData, column, value){
+    {text: '系统', datafield: 'IsSys', width: 265, cellsrenderer: function(rowData, column, value){
 
         return (<div>{ value == '1' ? '是' : '否'}</div>)
 
