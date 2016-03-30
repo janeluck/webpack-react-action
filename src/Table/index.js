@@ -757,7 +757,7 @@ export default class Tr extends React.Component {
 
     checkedToggle(index){
 
-        // 可换成dispatch
+
 
         this.props.onRowChecked(index, !this.props.isOnChecked)
     }
@@ -828,7 +828,7 @@ export default class Thead extends React.Component {
 
     checkedToggle(){
 
-        // 可换成dispatch
+
 
         this.props.onAllChecked(!this.props.isAllchecked)
     }
@@ -971,7 +971,7 @@ export default class Table extends React.Component {
                 </select>)
 
         }
-        return ''
+        return (<input type="text"/>)
     }
     render() {
 
@@ -979,7 +979,7 @@ export default class Table extends React.Component {
             <div>
                 <button>高级搜索</button>
                 <button>确定</button>
-                <table>
+                <table >
 
                     <Thead columns = {this.state.columns}
                            checkMode = {this.props.checkMode}
@@ -988,11 +988,11 @@ export default class Table extends React.Component {
                     />
                     <tbody>
                     <tr>
-                        {/*判断checkMode*/}
+                        {/* todo:判断checkMode*/}
                         <td></td>
 
 
-                        {this.state.columns.map((item, i) => (<th key = {i}>{this.renderSearch(item.searchType)}</th>))}
+                        {this.state.columns.map((item, i) => (<th  key = {i}>{this.renderSearch(item.searchType)}</th>))}
 
                     </tr>
 
@@ -1000,10 +1000,11 @@ export default class Table extends React.Component {
 
                </table>
 
-                <table>
+                <table >
 
                     <tbody>
                     {this.state.rows.map((row, i) => (
+
                         <Tr
                             checkMode = {this.props.checkMode}
                             index = {i}
@@ -1030,9 +1031,14 @@ export default class Table extends React.Component {
 
 Table.propTypes = {
     columns: React.PropTypes.array.isRequired,
+    searchColumns: React.PropTypes.array.isRequired,
     rows: React.PropTypes.array.isRequired,
-    checkMode: React.PropTypes.bool
+    checkMode: React.PropTypes.bool,
+    searchMode: React.PropTypes.bool,
+    width: React.PropTypes.number
 }
 Table.defaultProps = {
-    checkMode: false
+    checkMode: false,
+    searchMode: false
+
 }

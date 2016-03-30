@@ -11,12 +11,6 @@ require('../index.html');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
-var names = ['jane', 'joe', 'crystal', ['01', '02']];
-var titles = [
-    'It\'s Work!',
-    'jane',
-    names
-];
 var EditBtn = React.createClass({
     render: function(){
         return (
@@ -32,6 +26,7 @@ var EditBtn = React.createClass({
     }
 })
 
+// 模拟rowData
 let items = [
     {
         "ID":"528",
@@ -1181,235 +1176,120 @@ let items = [
         "status":"0"
     }
 ];
-let items0 = [
 
+/*
+* #渲染高级搜索单元格数据格式
+* searchColumns的datafield和columns的datafield字段相对应
+* searchType(待完善)
+*   0: 该字段不支持搜索
+*   1: input类型
+*   2: 时间段选择控件类型
+*   3: select类型
+* renderData里面存放渲染单元格所需要的数据
+*
+*
+*
+* 考虑到性能问题, 可思考另外一种组织方式
+* [
+*   name: {
+*       searchType: 1
+*   },
+*
+*   date: {
+*       searchType: 2
+*       renderData: {
+*           startTime: '20160101',
+*           endTime: '20160301'
+        }
+*   },
+*
+*   IsStop:{
+*       searchType: 3
+*       ....
+*   }
+* ]
+* * */
+
+
+
+
+
+let searchColumns = [
     {
-        "ID":"923",
-        "Name":"ttttt",
-        "OwnerID":"108",
-        "Text":{
-            "NumReport.Num1":"vvvv"
-        },
-        "IsSys":"0",
-        "NpDay":"1",
-        "IsStop":"1",
-        "NpType":"day",
-        "IsDeleted":"0",
-        "ModifiedTime":"2016-03-24 15:32:31",
-        "CreatedByID":"108",
-        "CreatedTime":"2016-03-14 11:06:19",
-        "TplView":[
-            {
-                "Type":"0",
-                "DeptID":"0",
-                "ID":"923",
-                "UserID":"0",
-                "CreatedTime":"2016-03-14 11:06:19"
-            }
-        ],
-        "TplUp":[
-            {
-                "Type":"0",
-                "DeptID":"0",
-                "ID":"923",
-                "UserID":"0",
-                "CreatedTime":"2016-03-14 11:06:19"
-            }
-        ],
-        "NpStopTime":"2016-03-24 08:00:00",
-        "name":"ttttt",
-        "user":"\u6881\u6bd3\u6770",
-        "date":"2016-03-14 11:06:19",
-        "status":"1"
+        datafield: 'name',
+        searchType: 1
     },
     {
-        "ID":"908",
-        "Name":"00",
-        "OwnerID":"4365",
-        "Text":{
-            "NumReport.Num1":"888"
-        },
-        "IsSys":"0",
-        "NpDay":"14",
-        "IsStop":"1",
-        "NpType":"month",
-        "IsDeleted":"0",
-        "ModifiedTime":"2016-03-24 15:36:24",
-        "CreatedByID":"4365",
-        "CreatedTime":"2016-03-09 16:01:56",
-        "TplView":[
-            {
-                "Type":"0",
-                "DeptID":"0",
-                "ID":"908",
-                "UserID":"0",
-                "CreatedTime":"2016-03-09 16:01:56"
-            }
-        ],
-        "TplUp":[
-            {
-                "Type":"0",
-                "DeptID":"0",
-                "ID":"908",
-                "UserID":"0",
-                "CreatedTime":"2016-03-09 16:01:56"
-            }
-        ],
-        "NpStopTime":"2016-03-31 08:00:00",
-        "name":"00",
-        "user":"\u7b80\u7389",
-        "date":"2016-03-09 16:01:56",
-        "status":"1"
+        datafield: 'user',
+        searchType: 1
     },
     {
-        "ID":"903",
-        "Name":"\u6d4b\u8bd50303",
-        "OwnerID":"65683",
-        "Text":{
-            "NumReport.Num1":"123"
-        },
-        "IsSys":"0",
-        "NpDay":"1",
-        "IsStop":"1",
-        "NpType":"day",
-        "IsDeleted":"0",
-        "ModifiedTime":"2016-03-24 15:21:56",
-        "CreatedByID":"65683",
-        "CreatedTime":"2016-03-03 12:44:38",
-        "TplView":[
-            {
-                "Type":"1",
-                "DeptID":"715",
-                "ID":"903",
-                "UserID":"65683",
-                "CreatedTime":"2016-03-03 12:44:38"
-            }
-        ],
-        "TplUp":[
-            {
-                "Type":"1",
-                "DeptID":"715",
-                "ID":"903",
-                "UserID":"65683",
-                "CreatedTime":"2016-03-03 12:44:38"
-            },
-            {
-                "Type":"1",
-                "DeptID":"715",
-                "ID":"903",
-                "UserID":"152701",
-                "CreatedTime":"2016-03-03 12:44:38"
-            },
-            {
-                "Type":"1",
-                "DeptID":"717",
-                "ID":"903",
-                "UserID":"17567",
-                "CreatedTime":"2016-03-03 12:44:38"
-            },
-            {
-                "Type":"1",
-                "DeptID":"717",
-                "ID":"903",
-                "UserID":"151943",
-                "CreatedTime":"2016-03-03 12:44:38"
-            },
-            {
-                "Type":"1",
-                "DeptID":"716",
-                "ID":"903",
-                "UserID":"14646",
-                "CreatedTime":"2016-03-03 12:44:38"
-            },
-            {
-                "Type":"1",
-                "DeptID":"716",
-                "ID":"903",
-                "UserID":"54022",
-                "CreatedTime":"2016-03-03 12:44:38"
-            }
-        ],
-        "NpStopTime":"2016-03-24 08:00:00",
-        "name":"\u6d4b\u8bd50303",
-        "user":"lrb",
-        "date":"2016-03-03 12:44:38",
-        "status":"1"
+        datafield: 'date',
+        searchType: 2,
+        renderData: {
+            startTime: '20160101',
+            endTime: '20160301'
+        }
     },
     {
-        "ID":"903",
-        "Name":"\u6d4b\u8bd50303",
-        "OwnerID":"65683",
-        "Text":{
-            "NumReport.Num1":"123"
-        },
-        "IsSys":"0",
-        "NpDay":"1",
-        "IsStop":"1",
-        "NpType":"day",
-        "IsDeleted":"0",
-        "ModifiedTime":"2016-03-24 15:21:56",
-        "CreatedByID":"65683",
-        "CreatedTime":"2016-03-03 12:44:38",
-        "TplView":[
-            {
-                "Type":"1",
-                "DeptID":"715",
-                "ID":"903",
-                "UserID":"65683",
-                "CreatedTime":"2016-03-03 12:44:38"
-            }
-        ],
-        "TplUp":[
-            {
-                "Type":"1",
-                "DeptID":"715",
-                "ID":"903",
-                "UserID":"65683",
-                "CreatedTime":"2016-03-03 12:44:38"
-            },
-            {
-                "Type":"1",
-                "DeptID":"715",
-                "ID":"903",
-                "UserID":"152701",
-                "CreatedTime":"2016-03-03 12:44:38"
-            },
-            {
-                "Type":"1",
-                "DeptID":"717",
-                "ID":"903",
-                "UserID":"17567",
-                "CreatedTime":"2016-03-03 12:44:38"
-            },
-            {
-                "Type":"1",
-                "DeptID":"717",
-                "ID":"903",
-                "UserID":"151943",
-                "CreatedTime":"2016-03-03 12:44:38"
-            },
-            {
-                "Type":"1",
-                "DeptID":"716",
-                "ID":"903",
-                "UserID":"14646",
-                "CreatedTime":"2016-03-03 12:44:38"
-            },
-            {
-                "Type":"1",
-                "DeptID":"716",
-                "ID":"903",
-                "UserID":"54022",
-                "CreatedTime":"2016-03-03 12:44:38"
-            }
-        ],
-        "NpStopTime":"2016-03-24 08:00:00",
-        "name":"\u6d4b\u8bd50303",
-        "user":"lrb",
-        "date":"2016-03-03 12:44:38",
-        "status":"1"
+        datafield: 'IsStop',
+        searchType: 3,
+        renderData: {
+            options:[
+                {
+                    text: '全部',
+                    // Notes: 该条目0和1被占用,以后类似情况约定0为全部
+                    value: -1,
+                    default: true
+                },
+                {
+                    text: '启动',
+                    value: 1,
+                    default: false
+                },
+                {
+                    text: '停止',
+                    value: 0,
+                    default: false
+                }
+
+            ]
+        }
+    },
+    // Notes: 没有搜索类型的列也可以不传
+    {
+        datafield: 'ID',
+        searchType: 0
+    },
+    {
+        datafield: 'IsSys',
+        searchType: 3,
+        renderData: {
+            options:[
+                {
+                    text: '全部',
+                    // Notes: 该条目0和1被占用,以后类似情况约定0为全部
+                    value: -1,
+                    default: true
+                },
+                {
+                    text: '是',
+                    value: 1,
+                    default: false
+                },
+                {
+                    text: '否',
+                    value: 0,
+                    default: false
+                }
+
+            ]
+        }
     }
+
 ];
+
+// table所用的列信息
 let columns = [
     {text: '报表名称', datafield: 'name', width: 230, searchType: 0},
     {text: '创建人', datafield: 'user', width: 70, searchType:1},
@@ -1438,448 +1318,7 @@ let columns = [
     }
 ];
 
-/*
- ReactDOM.render(
- <div>
- {titles}
- </div>,
 
- document.getElementById('example')
- );
-
- // component
- // make sure first letter of class name be uppercase
- // prop validation  http://facebook.github.io/react/docs/reusable-components.html
- // getDefaultProps
- var HelloMsg = React.createClass({
- getDefaultProps: function(){
- return {
- phone: '13512345678'
- }
- },
- propTypes: {
- name: React.PropTypes.string.isRequired
- },
- render: function(){
- return <h1 className= {this.props.class}>hello, {this.props.name}, {this.props.phone}</h1>
- }
- });
-
- ReactDOM.render(
- <HelloMsg name = "lucy" class = "component-a" />,
- document.getElementById('classDemo')
- );
-
-
-
- // this.props.children
- // having no child: undefined
- // having only one child: object
- // having two or more children: array
- var NotesList = React.createClass({
- render: function() {
- return (
- <ol>
- {
- React.Children.map(this.props.children, function (child) {
- return <li>{child}</li>;
- })
- }
- </ol>
- );
- }
- });
-
- ReactDOM.render(
- <NotesList>
- <span>hello</span>
- <span>world</span>
- </NotesList>,
- document.getElementById('listDemo')
- );
-
-
- // ref: get real dom
-
- var MyComponent = React.createClass({
- handleClick: function() {
- this.refs.myTextInput.focus();
- },
- render: function() {
- return (
- <div>
- <input type="text" ref="myTextInput" />
- <input type="button" value="Focus the text input" onClick={this.handleClick} />
- </div>
- );
- }
- });
-
- ReactDOM.render(
- <MyComponent />,
- document.getElementById('realDom')
- );
-
-
- // state: state machine
- var LikeButton = React.createClass({
- getInitialState: function() {
- return {liked: false};
- },
- handleClick: function(event) {
- this.setState({liked: !this.state.liked});
- },
- render: function() {
- var text = this.state.liked ? 'like' : 'haven\'t liked';
- return (
- <p onClick={this.handleClick}>
- You {text} this. Click to toggle.
- </p>
- );
- }
- });
-
- ReactDOM.render(
- <LikeButton />,
- document.getElementById('stateMachine')
- );
-
-
- // forms
- var FormEl0 = React.createClass({
- getInitialState: function() {
- return {value: 'Hello!'};
- },
- handleChange: function(event) {
- this.setState({value: event.target.value});
- },
- render: function() {
- return (
- <input
- type="text"
- value={this.state.value}
- onChange={this.handleChange}
- />
- );
- }
- });
- ReactDOM.render(
- <FormEl0 />,
- document.getElementById('formEl0')
-
- );
-
-
-
-
- var FormEl1 = React.createClass({
- getInitialState: function() {
- return {value: 'C'};
- },
- handleChange: function(event) {
- this.setState({value: event.target.value});
- },
- render: function(){
- return   <select value="B" onChange={this.handleChange}>
- <option value="A">Apple</option>
- <option value="B">Banana</option>
- <option value="C">Cranberry</option>
- </select>
- }
- });
- ReactDOM.render(
- <FormEl1 />,
- document.getElementById('formEl1')
-
- );
-
-
-
- var Notices = React.createClass({
- getInitialState: function () {
- return {
- opacity: 1.0
- };
- },
-
- componentDidMount: function () {
- this.timer = setInterval(function () {
- var opacity = this.state.opacity;
- opacity -= .05;
- if (opacity < 0.1) {
- opacity = 1.0;
- }
- this.setState({
- opacity: opacity
- });
- }.bind(this), 100);
- },
-
- render: function () {
- return (
- <div style={{opacity: this.state.opacity}}>
- Hello {this.props.name}
- </div>
- );
- }
- });
-
- ReactDOM.render(
- <Notices name="awesome"/>,
- document.getElementById('lifeCycle')
-
- );
-
-
- var UserGist = React.createClass({
- getInitialState: function() {
- return {
- username: '',
- lastGistUrl: ''
- };
- },
-
- componentDidMount: function() {
- $.get(this.props.source, function(result) {
- var lastGist = result[0];
- if (this.isMounted()) {
- this.setState({
- username: lastGist.owner.login,
- lastGistUrl: lastGist.html_url
- });
- }
- }.bind(this));
- },
-
- render: function() {
- return (
- <div>
- {this.state.username}'s last gist is
- <a href={this.state.lastGistUrl}>here</a>.
- </div>
- );
- }
- });
-
- ReactDOM.render(
- <UserGist source="https://api.github.com/users/octocat/gists" />,
- document.getElementById('ajaxDemo')
- );
-
-var TodoList = React.createClass({
-    getItems: function(items){
-
-        return items.map(function(item, i){
-            return <li key = {i}>{item}</li>;
-        })
-    },
-    render: function(){
-        return (<ul>
-            {this.getItems(this.props.items)}
-        </ul>)
-    }
-});
-var TodoApp = React.createClass({
-    getInitialState: function() {
-        return {
-            value: '',
-            items: []
-        };
-    },
-    handleChange: function(event) {
-        this.setState({value: event.target.value});
-    },
-    handleClick: function(){
-
-        this.setState({
-            items: this.state.items.concat(this.state.value),
-            value: ''
-        });
-
-    },
-    render: function() {
-        return (
-            <div>
-                <TodoList items = {this.state.items} />
-                <input
-                    type="text"
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                />
-                <button onClick = {this.handleClick}>Add {this.state.items.length + 1} </button>
-            </div>
-        );
-    }
-});
-ReactDOM.render(
-    <TodoApp/>,
-    document.getElementById('todoList')
-);
-
-
-
-
-// todo list app with remove
-var TodoRemove = React.createClass({
-    getInitialState: function() {
-        return {
-            value: '',
-            items: []
-        };
-    },
-    remove: function(el){
-        this.setState({
-            items: this.state.items.filter(function(item){
-                return item != el;
-            })
-
-        });
-    },
-    handleChange: function(event) {
-        this.setState({value: event.target.value});
-    },
-    handleClick: function(){
-
-        this.setState({
-            items: this.state.items.concat(this.state.value),
-            value: ''
-        });
-
-    },
-    render: function() {
-        return (
-            <div>
-                <ol>
-                    {
-                        this.state.items.map(
-                            function(item, i) {
-                                return (<li key = {i}>
-                                    <span>{item}</span>
-                                    <a onClick = {this.remove.bind(this, item)}> x </a>
-                                </li>)
-                            }
-                                .bind(this)
-                        )
-                    }
-                </ol>
-                <input
-                    type="text"
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                />
-                <button onClick = {this.handleClick}>Add {this.state.items.length + 1} </button>
-            </div>
-        );
-    }
-});
-ReactDOM.render(
-    <TodoRemove/>,
-    document.getElementById('todoRemove')
-);
-
-
-
-
-
-var Td = React.createClass({
-    render: function(){
-        return (
-            <td>
-                {this.props.text}
-            </td>
-        )
-    }
-})
-var Tr = React.createClass({
-    getInitialState: function() {
-        return {
-            row: this.props.row
-        };
-    },
-    refresh: function(row, column){
-        this.setState({
-            row: row
-        })
-    },
-    resolveRow: function(row, columns){
-
-        return columns.map((col, i) => col['datafield'])
-            .map((keyName, i) =>  ({
-                keyName: keyName,
-                // 判断该列是否为自定义渲染
-                text: columns[i]['cellsrenderer'] ?  columns[i]['cellsrenderer'].call(this, row, columns[i], row[keyName]) : row[keyName]
-            })
-        )
-
-    },
-
-    render: function() {
-
-        return (
-            <tr >
-                {
-
-                    this.resolveRow(this.state.row, this.props.columns).map(function(item, i){
-                        return (<Td text = {item.text}  key = {i} />)
-                    })
-                }
-            </tr>
-        )
-    }
-})
-var Thead = React.createClass({
-    render: function() {
-
-        return (
-            <thead>
-                <tr>
-            {
-                this.props.columns.map((col, i) => col['text'])
-                    .map((item, i) =>  (<th key = {i}>{item}</th>))
-            }
-                    </tr>
-            </thead>
-
-        )
-    }
-})
-
-
-// Jtable
-var Jtable = React.createClass({
-    getInitialState: function() {
-        return {
-            items: this.props.items
-        };
-    },
-    refresh: function(items){
-        this.setState({
-            items: items
-        })
-    },
-    render: function() {
-        return (
-            <div>
-                <table>
-                    <Thead columns = {this.props.columns}/>
-                    <tbody>
-                        {
-                            this.state.items.map((item, i) => (<Tr key = {i} row =  {item}  columns = {this.props.columns} />))
-                        }
-                    </tbody>
-                </table>
-                <button onClick = {this.refresh.bind(this, items0)} >刷新</button>
-
-            </div>
-        );
-    }
-});
-ReactDOM.render(
-    <Jtable items = {items} columns = {columns} />,
-    document.getElementById('jtable')
-);
-
-*/
 
 
 let table = ReactDOM.render(
@@ -1887,6 +1326,8 @@ let table = ReactDOM.render(
         columns = {columns}
         rows = {items}
         checkMode = {true}
+        searchMode= {true}
+        searchColumns = {searchColumns}
     />,
     document.getElementById('table')
 );
