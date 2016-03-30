@@ -1411,13 +1411,13 @@ let items0 = [
     }
 ];
 let columns = [
-    {text: '报表名称', datafield: 'name', width: 230},
-    {text: '创建人', datafield: 'user', width: 70},
-    {text: '创建时间', datafield: 'date', width: 160},
-    {text: '状态', datafield: 'IsStop', width: 60, cellsrenderer: function(rowData, column, value){
+    {text: '报表名称', datafield: 'name', width: 230, searchType: 0},
+    {text: '创建人', datafield: 'user', width: 70, searchType:1},
+    {text: '创建时间', datafield: 'date', width: 160, searchType:2},
+    {text: '状态', datafield: 'IsStop', width: 60, searchType:3, cellsrenderer: function(rowData, column, value){
         return value == 0 ? '启动' : '停止'
     }},
-    {text: '操作', datafield: 'ID', width: 265, cellsrenderer: function(rowData, column, value){
+    {text: '操作', datafield: 'ID', width: 265,searchType:0, cellsrenderer: function(rowData, column, value){
         // this -> 所在行<Tr/>
         return (
             <div>
@@ -1430,7 +1430,7 @@ let columns = [
         //return (<EditBtn    deletename = '删除' ondelete = {()=>{this.refresh(Object.assign({}, rowData, {name: 'jdkaljdksa'}));}}  editname = '编辑' onedit = {function(){console.log(rowData)}}/>)
     }
     },
-    {text: '系统', datafield: 'IsSys', width: 265, cellsrenderer: function(rowData, column, value){
+    {text: '系统', datafield: 'IsSys', width: 265,searchType:0, cellsrenderer: function(rowData, column, value){
 
         return (<div>{ value == '1' ? '是' : '否'}</div>)
 
