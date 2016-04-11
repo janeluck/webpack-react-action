@@ -1,2 +1,4 @@
+# Exclude IDE project folders
 .idea/
+
 node_modules/
