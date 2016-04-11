@@ -899,6 +899,7 @@ export default class Table extends React.Component {
         this.setState({
             showSearch: false
         })
+
         // 获取到搜索栏表单数据
         console.log(document.querySelectorAll('[name^="search-"]'));
         this.refreshPage()
