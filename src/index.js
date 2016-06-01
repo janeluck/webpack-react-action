@@ -1464,7 +1464,7 @@ var FilterableProductTable = React.createClass({
             filterText,
             inStockOnly
 
-        })
+        }, ()=>{console.log(this.state)})
     },
 
     render: function() {
@@ -1497,4 +1497,54 @@ var PRODUCTS = [
 ReactDOM.render(
     <FilterableProductTable products={PRODUCTS} />,
     document.getElementById('productTable')
+);
+
+var Cards = React.createClass({
+    render(){
+        console.log(this.props.children)
+        return (
+            <div>
+                {this.props.children}
+                <p>Cards!</p>
+            </div>
+
+        )
+    }
+})
+var Card = React.createClass({
+    render(){
+        return (
+            <div>
+                <p>one card</p>
+            </div>
+        )
+    }
+})
+ReactDOM.render(
+    <Cards>
+        <Card />
+        <Card />
+    </Cards>,
+    document.getElementById('childrenDemo')
+);
+
+
+var CheckLink = React.createClass({
+    render: function() {
+        // This takes any props passed to CheckLink and copies them to <a>
+        return <a {...this.props}>{'√ '}{this.props.children}</a>;
+    }
+});
+
+/*ReactDOM.render(
+    <CheckLink href="/checked.html">
+        Click here!
+    </CheckLink>,
+    document.getElementById('example')
+);*/
+
+import Script from  './common/Script'
+ReactDOM.render(
+    <Script src = "http://front.upesn.com/esn/js/lib/jq/jquery-1.7.1.min.js"/>,
+    document.getElementById('example')
 );
