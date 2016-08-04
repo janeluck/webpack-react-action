@@ -10,7 +10,7 @@ module.exports = {
 
     output: {
         path: __dirname + "/build",
-        filename: "bundle.js"
+        filename: "[name]-[hash].js"
     },
 
     module: {
@@ -37,8 +37,9 @@ module.exports = {
             template: __dirname + "/src/app/index.tmpl.html"
         }),
         new webpack.BannerPlugin("Awesome Janeluck"),
-        new ExtractTextPlugin("style.css")
+        new ExtractTextPlugin("[name]-[hash].css")
     ]
 };
+
 
 
