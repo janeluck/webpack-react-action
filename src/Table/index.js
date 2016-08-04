@@ -6,11 +6,12 @@ import { isPlainObject, isFunction, isString, isArray } from 'lodash'
 
 // todo: 样式的默认值和自定义
 var React = require('react');
+
 let arr = [
     {
-        "ID":"528",
+        "ID":"8",
         "Name":"\u9500\u552e\u6708\u62a5",
-        "OwnerID":"4365",
+        "OwnerID":"45",
         "Text":{
             "NumReport.Num1":"\u56de\u6b3e\u91d1\u989d"
         },

@@ -36,15 +36,7 @@ module.exports = {
             template: __dirname + "/src/app/index.tmpl.html"
         }),
         new webpack.BannerPlugin("Awesome Janeluck"),
-        new webpack.HotModuleReplacementPlugin()
-    ],
-    devServer: {
-        contentBase: "./",
-        colors: true,
-        historyApiFallback: true,
-        hot: true,
-        inline: true,
-    }
+    ]
 };
 
 
