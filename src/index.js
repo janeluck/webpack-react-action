@@ -3,7 +3,7 @@
  */
 import { isPlainObject, isFunction, isString, isArray } from 'lodash'
 import Table  from './Table/'
-
+require('./index.less')
 require('./Table/table.less');
 // watch index.html
 require('../index.html');
@@ -1483,7 +1483,7 @@ var FilterableProductTable = React.createClass({
                     inStockOnly={this.state.inStockOnly}
                     onUserInput={this.handleUserInput}
                     ref={(searchBar) => {
-                        console.log(ReactDOM.findDOMNode(searchBar))
+                       // console.log(ReactDOM.findDOMNode(searchBar))
 
                     }}
                 />
@@ -1513,7 +1513,7 @@ ReactDOM.render(
 
 var Cards = React.createClass({
     render(){
-
+        //console.log(this.props.children)
         return (
             <div>
                 {this.props.children}
@@ -1537,7 +1537,11 @@ ReactDOM.render(
         <Card />
         <Card />
     </Cards>,
-    document.getElementById('childrenDemo')
+
+
+    document.getElementById('childrenDemo'),
+    function(){console.log(arguments)}
+
 );
 
 
@@ -1588,10 +1592,80 @@ var MyComponent = React.createClass({
     }
 });
 
+
+
+
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
+var TodoList = React.createClass({
+    componentWillReceiveProps: function(nextProps) {
+
+        console.log(nextProps)
+    },
+    getInitialState: function() {
+        return {items: ['hello', 'world', 'click', 'me'],
+            value: ''
+            };
+    },
+    handleAdd: function() {
+        var newItems =
+            this.state.items.concat([prompt('Enter some text')]);
+        this.setState({items: newItems});
+    },
+    handleRemove: function(i) {
+        var newItems = this.state.items.slice();
+        newItems.splice(i, 1);
+        this.setState({items: newItems});
+    },
+    handleInput: function (e) {
+
+        this.setState({
+            value: e.target.value
+        })
+    },
+    handleCopy: function(e){
+        console.log(e.target.value)
+    },
+    render: function() {
+
+        var items = this.state.items.map(function(item, i) {
+            return (
+                <div key={item}  onClick={this.handleRemove.bind(this, i)}>
+                    {item}
+                </div>
+            );
+        }.bind(this));
+        return (
+            <div  >
+                <button onClick={this.handleAdd}>Add Item</button>
+                <input type="text" value={this.state.value} onChange={this.handleInput} onCopy={this.handleCopy}/>
+                <input type="text" value={null}/>
+                <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                    {items}
+                </ReactCSSTransitionGroup>
+            </div>
+        );
+    }
+});
+
+
 ReactDOM.render(
-    <MyComponent />,
+    <TodoList  />,
     document.getElementById('example')
 );
 
+function myPrompt(question){
+    return prompt('what\'s your name')
+}
+
+//let names = ['jane', 'lucy', myPrompt('what\'s your name')]
 
 
+//console.log(names)
+
+
+ReactDOM.render(React.createElement('ul', { className: 'my-list', style:{
+    color: 'red',
+    height: 10,
+    border: '1px solid yellow'
+} }, 'sds'), document.getElementById('jun'));
