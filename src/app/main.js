@@ -3,7 +3,7 @@
  */
 var ReactDOM = require('react-dom');
 var React = require('react');
-
+import './main.less'
 ReactDOM.render(React.createElement('ul', { className: 'my-list', style:{
     color: 'red',
     height: 10,

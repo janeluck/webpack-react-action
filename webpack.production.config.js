@@ -3,6 +3,7 @@
  */
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
 
     entry:  __dirname + '/src/app/main.js',
@@ -27,7 +28,7 @@ module.exports = {
                 loader: "raw-loader"
             }, {
                 test: /\.less$/,
-                loader: "style!css!less?modules"
+                loader: ExtractTextPlugin.extract('style', 'css', 'less')
             }
         ]
     },
@@ -36,6 +37,7 @@ module.exports = {
             template: __dirname + "/src/app/index.tmpl.html"
         }),
         new webpack.BannerPlugin("Awesome Janeluck"),
+        new ExtractTextPlugin("style.css")
     ]
 };
 
