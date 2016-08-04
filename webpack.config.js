@@ -27,10 +27,15 @@ module.exports = {
                 loader: "raw-loader"
             }, {
                 test: /\.less$/,
-                loader: "style!css!less"
+                loader: "style!css!less?modules"
             }
         ]
     },
+    devServer: {
+        contentBase: "./",
+        colors: true,
+        historyApiFallback: true
+    }
 };
 
 

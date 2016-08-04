@@ -29,7 +29,7 @@ var EditBtn = React.createClass({
 // 模拟rowData
 let items = [
     {
-        "ID": "528",
+        "ID": "58",
         "Name": "\u9500\u552e\u6708\u62a5",
         "OwnerID": "4365",
         "Text": {
