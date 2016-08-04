@@ -4,6 +4,7 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+require('argv-set-env')()
 module.exports = {
 
     entry:  __dirname + '/src/app/main.js',
